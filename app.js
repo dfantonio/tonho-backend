@@ -50,6 +50,7 @@ app.post("/gifts/toggle", async (req, res) => {
       gift.name = req.body.name;
     }
     gift.save();
+    res.send(gift);
   } catch (error) {
     res.status(500).send(error);
   }
