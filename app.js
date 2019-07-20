@@ -3,10 +3,13 @@ const app = express();
 const mongoose = require("mongoose");
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/tonho-backend", {
-  useNewUrlParser: true,
-  useCreateIndex: true
-});
+mongoose.connect(
+  "mongodb+srv://tonho:pncdotonho@clustertonho-yj5rn.mongodb.net/test?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true
+  }
+);
 mongoose.set("useFindAndModify", false);
 
 const giftSchema = new mongoose.Schema({
@@ -89,4 +92,4 @@ app.get("/gifts", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Listening on port 3000"));
+app.listen(4000, () => console.log("Listening on port 4000"));
