@@ -4,10 +4,13 @@ const mongoose = require("mongoose");
 app.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://tonho:pncdotonho@clustertonho-yj5rn.mongodb.net/test?retryWrites=true&w=majority",
+  "mongodb+srv://admin:98075331@dbdolucas-p5mis.gcp.mongodb.net/test?retryWrites=true&w=majority",
+  // "mongodb+srv://tonho:pncdotonho@clustertonho-yj5rn.mongodb.net/test?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    reconnectTries: Number.MAX_VALUE,
+    autoReconnect: true
   }
 );
 mongoose.set("useFindAndModify", false);
@@ -29,6 +32,18 @@ const giftSchema = new mongoose.Schema({
 });
 
 const Gift = mongoose.model("Gift", giftSchema);
+
+// Tentar remover dps que eu upar o front pro servidor
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  next();
+});
 
 app.post("/gifts", async (req, res) => {
   const gift = new Gift(req.body);
@@ -92,4 +107,12 @@ app.get("/gifts", async (req, res) => {
   }
 });
 
-app.listen(4000, () => console.log("Listening on port 4000"));
+app.get("/", async (req, res) => {
+  try {
+    res.send("TA BOMBANDO :D V.2");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+app.listen(8080, () => console.log("Listening on port 8080"));
