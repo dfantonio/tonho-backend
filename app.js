@@ -3,10 +3,13 @@ const app = express();
 const mongoose = require("mongoose");
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/tonho-backend", {
-  useNewUrlParser: true,
-  useCreateIndex: true
-});
+mongoose.connect(
+  "mongodb+srv://tonho:pncdotonho@cluster0-yj5rn.gcp.mongodb.net/test?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true
+  }
+);
 mongoose.set("useFindAndModify", false);
 
 const giftSchema = new mongoose.Schema({
@@ -20,6 +23,14 @@ const giftSchema = new mongoose.Schema({
     default: false
   },
   name: {
+    type: String,
+    default: ""
+  },
+  valor: {
+    type: Number,
+    default: 0
+  },
+  mensagem: {
     type: String,
     default: ""
   }
