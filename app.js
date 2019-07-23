@@ -5,7 +5,7 @@ app.use(express.json());
 
 mongoose.connect(
   "mongodb+srv://admin:98075331@dbdolucas-p5mis.gcp.mongodb.net/test?retryWrites=true&w=majority",
-  // "mongodb+srv://tonho:pncdotonho@clustertonho-yj5rn.mongodb.net/test?retryWrites=true&w=majority",
+  // "mongodb+srv://tonho:pncdotonho@cluster0-yj5rn.gcp.mongodb.net/test?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -26,6 +26,14 @@ const giftSchema = new mongoose.Schema({
     default: false
   },
   name: {
+    type: String,
+    default: ""
+  },
+  valor: {
+    type: Number,
+    default: 0
+  },
+  mensagem: {
     type: String,
     default: ""
   }
